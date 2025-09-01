@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reptile Heaven Pet Store</title>
+  <style>
+    /* ===== RESET ===== */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0d0d0d;
+      color: #fff;
+      overflow-x: hidden;
+      position: relative;
+    }
+    h1,h2,h3 { font-weight:700; }
+    p { line-height:1.6; }
+
+    /* ===== ANIMATED BACKGROUND ===== */
+    body::before {
+      content:"";
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: url('https://www.chibi-aquarium.com/wp-content/uploads/2023/03/multi-color-guppies-in-aquarium_panpilai-paipa-Shutterstock.jpg') no-repeat center center/cover;
+      opacity:0.15;
+      z-index:-1;
+      animation: bgShift 20s infinite alternate;
+    }
+    @keyframes bgShift {
+      0% { transform: scale(1) translate(0,0);}
+      50% { transform: scale(1.05) translate(20px,20px);}
+      100% { transform: scale(1) translate(0,0);}
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      display:flex; justify-content:center; align-items:center;
+      padding:15px 20px;
+      background: rgba(0,0,0,0.8);
+      position: fixed; top:0; width:100%; z-index:1000;
+      backdrop-filter: blur(6px);
+    }
+    nav ul { list-style:none; display:flex; gap:25px; flex-wrap:wrap; }
+    nav a { color:#fff; text-decoration:none; font-weight:600; transition: color 0.3s; }
+    nav a:hover { color:#4CAF50; }
+
+    /* ===== HERO ===== */
+    .hero {
+      text-align:center;
+      padding:120px 20px 60px;
+    }
+    .hero h1 { font-size:3rem; color:#4CAF50; margin-bottom:20px; }
+    .hero p { font-size:1.2rem; margin-bottom:40px; color:#ddd; }
+
+    /* ===== BUTTON ===== */
+    .cta-btn {
+      background:linear-gradient(45deg, #4CAF50, #2E7D32);
+      color:#fff;
+      padding:15px 40px;
+      border:none;
+      border-radius:30px;
+      font-size:1rem;
+      font-weight:bold;
+      cursor:pointer;
+      transition:transform 0.3s, box-shadow 0.3s;
+    }
+    .cta-btn:hover { transform:scale(1.05); box-shadow:0 0 20px #4CAF50; }
+
+    /* ===== ABOUT US ===== */
+    .about { padding:80px 7%; text-align:center; background: rgba(0,0,0,0.75); }
+    .about h2 { font-size:2.5rem; color:#4CAF50; margin-bottom:20px; }
+    .about p { max-width:800px; margin:auto; font-size:1.1rem; color:#ddd; }
+
+    /* ===== GALLERY ===== */
+    .gallery { padding:80px 7%; text-align:center; }
+    .gallery h2 { font-size:2.5rem; color:#4CAF50; margin-bottom:40px; }
+    .gallery-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:25px; }
+    .gallery-card { background: rgba(255,255,255,0.05); padding:15px; border-radius:15px; transition: transform 0.3s; }
+    .gallery-card:hover { transform: translateY(-8px) scale(1.03); box-shadow:0 10px 25px rgba(0,0,0,0.6);}
+    .gallery-card img { width:100%; border-radius:10px; margin-bottom:10px; }
+    .price-tag { background:#4CAF50; color:#fff; display:inline-block; padding:5px 10px; border-radius:10px; font-weight:bold; }
+
+    /* ===== NEW ARRIVALS ===== */
+    .new-stock { padding:80px 7%; text-align:center; background: rgba(0,0,0,0.75); }
+    .new-stock h2 { font-size:2.5rem; color:#4CAF50; margin-bottom:40px; }
+    .new-stock-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:25px; }
+    .new-card { background: rgba(255,255,255,0.05); padding:15px; border-radius:15px; transition: transform 0.3s; }
+    .new-card:hover { transform: translateY(-8px) scale(1.03); box-shadow:0 10px 25px rgba(0,0,0,0.6);}
+    .new-card img { width:100%; border-radius:10px; margin-bottom:10px; }
+    .stock-tag { background:#FF5722; color:#fff; display:inline-block; padding:5px 10px; border-radius:10px; font-weight:bold; }
+
+    /* ===== MAP ===== */
+    .map { padding:80px 7%; text-align:center; }
+    .map h2 { font-size:2.5rem; color:#4CAF50; margin-bottom:40px; }
+    .map iframe { width:100%; height:400px; border:0; border-radius:15px; }
+
+    /* ===== CONTACT ===== */
+    .contact-info { text-align:center; padding:40px 7%; background: rgba(0,0,0,0.75); color:#ddd; font-size:1.2rem; }
+    .contact-info p { margin:5px 0; }
+
+    /* ===== FOOTER ===== */
+    footer { text-align:center; padding:20px; background:#111; color:#aaa; font-size:0.9rem; }
+
+    /* ===== FLOATING WHATSAPP ===== */
+    .whatsapp-float {
+      position:fixed; bottom:20px; right:20px; z-index:100; animation: pulse 2s infinite;
+    }
+    .whatsapp-float img { width:55px; height:55px; border-radius:50%; }
+    @keyframes pulse { 0%{transform:scale(1);} 50%{transform:scale(1.1);} 100%{transform:scale(1);} }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width:768px) {
+      .hero h1 { font-size:2.2rem; }
+      .hero p { font-size:1rem; }
+      section {padding:60px 15px;}
+    }
+    @media (max-width:480px) {
+      nav ul { flex-direction:column; align-items:center; gap:10px; }
+      .hero h1 { font-size:1.8rem; }
+      .hero p { font-size:0.9rem; }
+      .gallery-grid, .new-stock-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#new-stock">New Stock</a></li>
+        <li><a href="#map">Location</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>The Reptile Haven</h1>
+    <p class="typing" id="typing"></p>
+    <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
+  </section>
+
+  <!-- ABOUT US -->
+  <section id="about" class="about">
+    <h2>About Us</h2>
+    <p>
+      At Reptile Heaven, we care for reptiles like they are family. From snakes and lizards to fish and exotic amphibians, 
+      we provide premium care, expert advice, and healthy, happy pets. Our store is not just a shop — it’s a sanctuary where 
+      reptile enthusiasts and first-time owners alike can find guidance, supplies, and the perfect pet companion. We also focus 
+      on eco-friendly habitats and sustainable pet care. Whether it’s feeding, housing, or choosing the perfect new addition, 
+      our team is here to help every step of the way.
+    </p>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="gallery">
+    <h2>Our Pets</h2>
+    <div class="gallery-grid">
+      <div class="gallery-card">
+        <img src="https://tse4.mm.bing.net/th/id/OIP.OTqV2mzG0jo-V_PKMGr35AHaLI?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Bearded Dragon">
+        <div class="price-tag">R1,200</div>
+        <h3>Bearded Dragon</h3>
+      </div>
+      <div class="gallery-card">
+        <img src="https://peregrine-livefoods.co.uk/wp-content/uploads/XSPG050P-1024x1024.jpg" alt="Corn Snake">
+        <div class="price-tag">R900</div>
+        <h3>Corn Snake</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW STOCK ARRIVALS -->
+  <section id="new-stock" class="new-stock">
+    <h2>New Stock Arrivals</h2>
+    <div class="new-stock-grid">
+      <div class="new-card">
+        <img src="https://media.istockphoto.com/id/848384672/photo/piton.jpg?s=612x612&w=0&k=20&c=VcqViVCMiI80WGdkwd1PRdmZUZILGof5lAD-sw60HJc=" alt="Albino boa">
+        <div class="stock-tag">New!</div>
+        <h3>Albino Boa</h3>
+      </div>
+
+    <div class="new-stock-grid">
+      <div class="new-card">
+        <img src="https://images2.alphacoders.com/110/1109924.jpg" alt="Chameleon">
+        <div class="stock-tag">New!</div>
+        <h3>Chameleon</h3>
+      </div>
+  </section>
+
+  <!-- GOOGLE MAP -->
+<section id="map" class="map">
+  <h2>Our Location</h2>
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57223.96285641216!2d28.03064504863281!3d-26.31037959999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9505a74c048201%3A0xc072163ab28256af!2sThe%20Reptile%20Haven!5e0!3m2!1sen!2sza!4v1756729162772!5m2!1sen!2sza" 
+    width="100%" 
+    height="450" 
+    style="border:0;" 
+    allowfullscreen="" 
+    loading="lazy" 
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</section>
+
+  <!-- CONTACT INFO -->
+  <section id="contact" class="contact-info">
+    <p>📧 reptileheaven@gmail.com</p>
+    <p>📞 +27 61 536 6792</p>
+    <p>📞 +27 81 514 3597</p>
+    <p>📱 <a href="https://www.instagram.com/yourusername" target="_blank" style="color:#4CAF50; text-decoration:underline;">Follow us on Instagram</a></p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 Reptile Heaven Pet Store
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/27615366792" class="whatsapp-float" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp">
+  </a>
+
+  <!-- ===== TYPING ANIMATION ===== -->
+  <script>
+    const phrases = [
+      "Healthy Reptiles & Exotic Pets",
+      "Premium Pet Supplies",
+      "Expert Advice for Every Pet Owner",
+      "New Stock Arriving Weekly!"
+    ];
+    let i = 0, j = 0;
+    const typingEl = document.getElementById("typing");
+
+    function type() {
+      if (j < phrases[i].length) {
+        typingEl.textContent += phrases[i][j];
+        j++;
+        setTimeout(type, 70);
+      } else {
+        setTimeout(erase, 2000);
+      }
+    }
+
+    function erase() {
+      if (j > 0) {
+        typingEl.textContent = phrases[i].substring(0,j-1);
+        j--;
+        setTimeout(erase, 40);
+      } else {
+        i = (i + 1) % phrases.length;
+        setTimeout(type, 500);
+      }
+    }
+
+    type();
+  </script>
+
+</body>
+</html>
