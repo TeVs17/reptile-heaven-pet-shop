@@ -9,7 +9,7 @@
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0d0d0d;
+      background: #0d0d0d00;
       color: #fff;
       overflow-x: hidden;
       position: relative;
@@ -26,7 +26,7 @@
       background: url('https://www.chibi-aquarium.com/wp-content/uploads/2023/03/multi-color-guppies-in-aquarium_panpilai-paipa-Shutterstock.jpg') no-repeat center center/cover;
       opacity:0.15;
       z-index:-1;
-      animation: bgShift 20s infinite alternate;
+      animation: bgShift 5s infinite alternate;
     }
     @keyframes bgShift {
       0% { transform: scale(1) translate(0,0);}
@@ -38,7 +38,7 @@
     header {
       display:flex; justify-content:center; align-items:center;
       padding:15px 20px;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0, 0, 0, 0);
       position: fixed; top:0; width:100%; z-index:1000;
       backdrop-filter: blur(6px);
     }
@@ -69,7 +69,7 @@
     .cta-btn:hover { transform:scale(1.05); box-shadow:0 0 20px #4CAF50; }
 
     /* ===== ABOUT US ===== */
-    .about { padding:80px 7%; text-align:center; background: rgba(0,0,0,0.75); }
+    .about { padding:80px 7%; text-align:center; background: rgba(0, 0, 0, 0); }
     .about h2 { font-size:2.5rem; color:#4CAF50; margin-bottom:20px; }
     .about p { max-width:800px; margin:auto; font-size:1.1rem; color:#ddd; }
 
@@ -83,7 +83,7 @@
     .price-tag { background:#4CAF50; color:#fff; display:inline-block; padding:5px 10px; border-radius:10px; font-weight:bold; }
 
     /* ===== NEW ARRIVALS ===== */
-    .new-stock { padding:80px 7%; text-align:center; background: rgba(0,0,0,0.75); }
+    .new-stock { padding:80px 7%; text-align:center; background: rgba(0, 0, 0, 0); }
     .new-stock h2 { font-size:2.5rem; color:#4CAF50; margin-bottom:40px; }
     .new-stock-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:25px; }
     .new-card { background: rgba(255,255,255,0.05); padding:15px; border-radius:15px; transition: transform 0.3s; }
